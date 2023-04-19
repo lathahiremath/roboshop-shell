@@ -13,4 +13,4 @@ systemctl enable cart
 systemctl start cart
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 yum install mongodb-org-shell -y
-mongo --host mongo-dev.latha.fun </app/schema/cart.js
+mongo --host mongodb-dev.latha.fun </app/schema/cart.js
