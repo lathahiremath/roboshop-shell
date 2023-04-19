@@ -37,5 +37,5 @@ cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m>>>>>install mongodb client<<<<<\e[0m"
 yum install mongodb-org-shell -y
 
-echo -e "\e[36m>>>>>load schema<<<<<\e[0m"
+echo -e "\e[36m>>>>>Load schema<<<<<\e[0m"
 mongo --host mongo-dev.latha.fun </app/schema/catalogue.js
