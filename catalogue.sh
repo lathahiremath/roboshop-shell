@@ -1,7 +1,7 @@
 echo -e "\e[36m>>>>>configuring nodejs repos<<<<<\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-echo -e "\e[36m>>>>>install nodejs <<<<<\e[0m"
+echo -e "\e[36m>>>>>install Nodejs <<<<<\e[0m"
 yum install nodejs -y
 
 echo -e "\e[36m>>>>>Add application user<<<<<\e[0m"
