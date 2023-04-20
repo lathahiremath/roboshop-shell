@@ -30,12 +30,3 @@ echo -e "\e[36m>>>>>start cart service<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable cart
 systemctl start cart
-
-echo -e "\e[36m>>>>>copy mongodb repo<<<<<\e[0m"
-cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
-
-echo -e "\e[36m>>>>>install mongodb client<<<<<\e[0m"
-yum install mongodb-org-shell -y
-
-echo -e "\e[36m>>>>>load schema<<<<<\e[0m"
-mongo --host mongodb-dev.latha.fun </app/schema/cart.js
