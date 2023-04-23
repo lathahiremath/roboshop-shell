@@ -1,4 +1,9 @@
-source common.sh
+
+script path=${dirname $0}
+source ${script_path}/common.sh
+echo $app_user
+exit
+
 echo -e "\e[36m>>>>>configuring nodejs repos<<<<<\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
