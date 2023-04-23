@@ -1,7 +1,8 @@
+script=$(realpath "$0")
+script_path=$(dirname $"script")
 
-script_path=$(dirname $0)
 source ${script_path}/common.sh
-exit
+
 
 echo -e "\e[36m>>>>>configuring nodejs repos<<<<<\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
@@ -37,7 +38,7 @@ systemctl enable user
 systemctl restart user
 
 echo -e "\e[36m>>>>>copy mongodb repo<<<<<\e[0m"
-cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp $(script_path)/mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[36m>>>>>install mongodb client<<<<<\e[0m"
 yum install mongodb-org-shell -y
