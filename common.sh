@@ -3,22 +3,23 @@ app_user=roboshop
 script=$(realpath "$0")
 script_path=$(dirname $"script")
 
-print_head()
+func_print_head()
 {
   echo -e "\e[36m>>>>>$1<<<<<\e[0m"
 }
 
-schema_setup()
+func_schema_setup()
 {
-echo -e "\e[36m>>>>>copy mongodb repo<<<<<\e[0m"
-cp $(script_path)/mongo.repo /etc/yum.repos.d/mongo.repo
+  if[ "schema_setup" == "mongo"]; then
+   func_print_head copy mongodb repo
+   cp $(script_path)/mongo.repo /etc/yum.repos.d/mongo.repo
 
-echo -e "\e[36m>>>>>install mongodb client<<<<<\e[0m"
-yum install mongodb-org-shell -y
+  func_print_head install mongodb client
+  yum install mongodb-org-shell -y
 
-echo -e "\e[36m>>>>>load schema<<<<<\e[0m"
-mongo --host mongodb-dev.latha.fun </app/schema/${component}.js
-}
+  func_print_head load schema
+  mongo --host mongodb-dev.latha.fun </app/schema/${component}.js
+ }
 
 func_nodejs() {
 print_head "configuring nodejs repo"
@@ -53,5 +54,44 @@ print_head "start cart service"
 systemctl daemon-reload
 systemctl enable ${component}
 systemctl restart ${component}
-schema_setup
+func_schema_setup
 }
+
+func_java()
+{
+  print_head "Install maven"
+  yum install maven -y
+
+  print_head "create app user"
+  useradd ${app_user}
+
+  print_head "Create app directory"
+  rm -rf /app
+  mkdir /app
+
+  print_head "download app content"
+  curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
+
+  print_head "extract app content"
+  cd /app
+  unzip /tmp/shipping.zip
+
+  print_head "download maven dependencies"
+  mvn clean package
+  mv target/shipping-1.0.jar shipping.jar
+
+  print_head "install mysql client"
+  yum install mysql -y
+
+  print_head "load schema"
+  mysql -h mysql-dev.latha.fun -uroot -p${mysql_root_password} < /app/schema/shipping.sql
+
+  cp $(script_path)/shipping.service /etc/systemd/system/shipping.service
+
+  print_head "start shipping service"
+  systemctl daemon-reload
+  systemctl enable shipping
+  systemctl restart shipping
+
+
+}}
