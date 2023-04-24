@@ -10,15 +10,16 @@ func_print_head()
 
 func_schema_setup()
 {
-  if[ "schema_setup" == "mongo" ]; then
+  if [ "schema_setup" == "mongo" ]; then
    func_print_head copy mongodb repo
    cp $(script_path)/mongo.repo /etc/yum.repos.d/mongo.repo
 
-  func_print_head install mongodb client
-  yum install mongodb-org-shell -y
+   func_print_head install mongodb client
+   yum install mongodb-org-shell -y
 
-  func_print_head load schema
-  mongo --host mongodb-dev.latha.fun </app/schema/${component}.js
+   func_print_head load schema
+   mongo --host mongodb-dev.latha.fun </app/schema/${component}.js
+  fi
 
   if [ "schema_setup" == "mysql" ]; then
 
@@ -74,6 +75,7 @@ npm install
 
 func_systemd_setup
 func_schema_setup
+}
 
 func_java()
 {
