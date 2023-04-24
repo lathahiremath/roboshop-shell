@@ -5,6 +5,10 @@ source ${script_path}/common.sh
 
 rabbitmq_appuser_password=$1
 
+if [ -z "$rabbitmq_appuser_password" ];then
+  echo input rabbitmq_appuser_password missing
+fi
+
 yum install python36 gcc python3-devel -y
 useradd ${app_user}
 rm -rf /app
