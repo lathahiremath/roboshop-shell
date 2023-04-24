@@ -39,7 +39,7 @@ func_schema_setup()
 func_app_prereq()
 {
 func_print_head "Add application user"
-useradd ${app_user}
+useradd ${app_user} >/tmp/roboshop.log
 func_stat_check $?
 
 func_print_head "create application directory"
@@ -75,6 +75,7 @@ if [ $1 -eq 0 ]; then
       echo -e "\e[32m>>>>>successful<<<<<\e[0m"
     else
       echo -e "\e[31m>>>>>faliure<<<<<\e[0m"
+      echo "refer the log file /tmp/roboshop.log for more info"
       exit 1
 fi
 }
