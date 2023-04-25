@@ -6,18 +6,23 @@ if [ -z "$mysql_root_password" ];then
   echo input mysql_root_password missing
 fi
 
-echo -e "\e[36m>>>>>disable mysql 8 version<<<<<\e[0m"
-dnf module disable mysql -y
+func_print_head "Disable mysql 8 version"
+dnf module disable mysql -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m>>>>copy mysql repo file<<<<<\e[0m"
-cp $(script_path)/mysql.repo /etc/yum.repos.d/mysql.repo
+func_print_head "copy mysql repo file"
+cp $(script_path)/mysql.repo /etc/yum.repos.d/mysql.repo &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m>>>>>Install Mysql<<<<<\e[0m"
-yum install mysql-community-server -y
+func_print_head "install mysql"
+yum install mysql-community-server -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m>>>>>Start mysql<<<<<\e[0m"
-systemctl enable mysqld
-systemctl restart mysqld
+func_print_head "start mysql"
+systemctl enable mysqld &>>$log_file
+systemctl restart mysqld &>>$log_file
+func_stat_check $?
 
-echo -e "\e[36m>>>>>Reset mysql password<<<<<\e[0m"
-mysql_secure_installation --set-root-pass $mysql_root_password
+func_print_head "reset mysql passsword"
+mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file
+func_stat_check $?
