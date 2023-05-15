@@ -1,6 +1,5 @@
 script=$(realpath "$0")
-script_path=$(dirname $"script")
-
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
 func_print_head "Install redis repo"
@@ -8,7 +7,7 @@ yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  &>>$log_
 func_stat_check $?
 
 func_print_head "Install redis"
-module enable redis:remi-6.2 -y  &>>$log_file
+dnf module enable redis:remi-6.2 -y  &>>$log_file
 yum install redis -y  &>>$log_file
 func_stat_check $?
 
