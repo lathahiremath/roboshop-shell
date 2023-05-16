@@ -11,7 +11,7 @@ dnf module enable redis:remi-6.2 -y  &>>$log_file
 yum install redis -y  &>>$log_file
 func_stat_check $?
 
-func_print_head "update redis listen adress"
+func_print_head "update redis listen address"
 sed -i -e 's|127.0.0.0|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf  &>>$log_file
 func_stat_check $?
 

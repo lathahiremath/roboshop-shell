@@ -12,7 +12,7 @@ dnf module disable mysql -y &>>$log_file
 func_stat_check $?
 
 func_print_head "copy mysql repo file"
-cp $(script_path)/mysql.repo /etc/yum.repos.d/mysql.repo &>>$log_file
+cp ${script_path}/mysql.repo /etc/yum.repos.d/mysql.repo &>>$log_file
 func_stat_check $?
 
 func_print_head "install mysql"
@@ -24,6 +24,6 @@ systemctl enable mysqld &>>$log_file
 systemctl restart mysqld &>>$log_file
 func_stat_check $?
 
-func_print_head "reset mysql passsword"
+func_print_head "reset mysql password"
 mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file
 func_stat_check $?
