@@ -74,7 +74,7 @@ func_stat_check $?
 func_systemd_setup()
 {
   func_print_head "copy systemD service"
-  cp $(script_path)/${component}.service /etc/systemd/system/${component}.service &>>$log_file
+  cp ${script_path}/${component}.service /etc/systemd/system/${component}.service &>>$log_file
   func_stat_check $?
 
     func_print_head "start ${component} service"
@@ -139,7 +139,7 @@ pip3.6 install -r requirements.txt &>>$log_file
 func_stat_check $?
 
 func_print_head "Update password in systemd Service file"
-sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" $(script_path)/payment.service &>>$log_file
+sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" ${script_path}/payment.service &>>$log_file
 func_stat_check $?
 
 func_systemd_setup
