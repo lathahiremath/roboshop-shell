@@ -5,6 +5,7 @@ mysql_root_password=$1
 
 if [ -z "$mysql_root_password" ];then
   echo input mysql_root_password missing
+  exit 1
 fi
 
 component="shipping"
