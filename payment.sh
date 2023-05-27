@@ -6,7 +6,7 @@ source ${script_path}/common.sh
 rabbitmq_appuser_password=$1
 
 if [ -z "$rabbitmq_appuser_password" ];then
-  echo input rabbitmq_appuser_password missing
+  echo Input Roboshop Appuser Password Missing
   exit 1
 fi
 
