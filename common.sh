@@ -50,7 +50,7 @@ func_schema_setup()
 func_app_prereq()
 {
 func_print_head "Add application user"
-id ${app_user} &>>$/tmp/roboshop.log
+id ${app_user} &>>/tmp/roboshop.log
 if [ $? -ne 0 ]; then
  useradd ${app_user} &>>/tmp/roboshop.log
 fi
